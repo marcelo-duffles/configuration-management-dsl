@@ -20,12 +20,11 @@ header("Content-Type: text/plain");
 
 echo "Hello, world!\n";,Some(ubuntu),Some(644))
 [success] Total time: 52 s, completed Dec 14, 2018 7:49:11 AM
-
 ```
 
 The above execution shows that the application installed the packages `apache2` and `php5` and the sample PHP app in the file `/var/www/html/index.php` on the targets servers. The code snippet below shows the desired state declared by the user:
 
-```
+```scala
 object TwoPHPServers extends App {
   iWant(php)("ubuntu@54.205.233.118", "ubuntu@54.210.111.220")
 }
@@ -40,7 +39,7 @@ The configuration management tool took care of ensuring the desired state matche
 
 You can build your own modules, here's the `php` module we just used:
 
-```
+```scala
 package object dufflesmodules {
   def php = Seq(
     Package("apache2"),
@@ -63,7 +62,7 @@ As you can see, this is plain Scala code.
 
 ### Resources
 
-The building blocks are the `Resource`s defined `src/main/scala/dufflesdsl/model/Resource.scala`.
+The building blocks are the `Resource`s defined in `src/main/scala/dufflesdsl/model/Resource.scala`.
 
 
 ## Internals
