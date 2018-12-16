@@ -45,14 +45,15 @@ package object dufflesmodules {
   def php = Seq(
     Package("apache2"),
     Package("php5"),
-    File(name = "/var/www/html/index.php",
-        content = """<?php
-                    |
-                    |header("Content-Type: text/plain");
-                    |
-                    |echo "Hello, world!\n";""".stripMargin,
-        owner = Some("ubuntu"),
-        mode = Some("644")
+    File(
+      name = "/var/www/html/index.php",
+      content = """<?php
+                  |
+                  |header("Content-Type: text/plain");
+                  |
+                  |echo "Hello, world!\n";""".stripMargin,
+      owner = Some("ubuntu"),
+      mode = Some("644")
     ),
   )
 }
@@ -62,7 +63,7 @@ As you can see, this is plain Scala code.
 
 ### Resources
 
-The building blocks are the `Resources` defined `src/main/scala/dufflesdsl/model/Resource.scala`.
+The building blocks are the `Resource`s defined `src/main/scala/dufflesdsl/model/Resource.scala`.
 
 
 ## Internals
@@ -77,7 +78,7 @@ A `Modifier` applies the configurations that are missing in reality, but declare
 
 ### Data model and workflow
 
-The data unit is a `ResourceSet` (see `src/main/scala/dufflesdsl/ResourceSet.scala`), which is initially built from the user input, then it goes through a functional pipeline defined in `src/main/scala/dufflesdsl/Workflow.scala`. The entire pipeline can be well summarized by this function composition `toResourceSet andThen diffWithReality andThen doChanges andThen report` used by the `Workflow`.
+The data unit is a `ResourceSet` (see `src/main/scala/dufflesdsl/model/ResourceSet.scala`), which is initially built from the user input, then it goes through a functional pipeline defined in `src/main/scala/dufflesdsl/Workflow.scala`. The entire pipeline can be well summarized by this function composition `toResourceSet andThen diffWithReality andThen doChanges andThen report` used by the `Workflow`.
 
 ## Testing
 

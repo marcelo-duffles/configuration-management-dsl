@@ -1,11 +1,12 @@
 package dufflesdsl
 
-import scala.util.{ Try, Failure, Success }
 import scala.sys.process._
-import dufflesdsl.model._
-import dufflesdsl.ResourceSet._
+import scala.util.{ Try, Failure, Success }
 
-private[dufflesdsl] trait Sensor extends BaseDriver {
+import dufflesdsl.model._
+import dufflesdsl.model.ResourceSet._
+
+private[dufflesdsl] trait Sensor {
 
   def realityOf(set: ResourceSet)(implicit run: String => Status): Try[ResourceSet] =
     realityOfASet(set, realityOfAResource)
@@ -30,7 +31,7 @@ private[dufflesdsl] trait Sensor extends BaseDriver {
 
 }
 
-private object Sensor {
+private object Sensor extends BaseDriver {
 
   def senseFile(f: File)(implicit run: String => Status): Try[Option[File]] = createTmpFile(f).flatMap(compare)
   def sensePackage(p: Package)(implicit run: String => Status): Try[Option[Package]] = checkOS(p).flatMap(queryPackage)

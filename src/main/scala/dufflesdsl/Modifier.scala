@@ -1,10 +1,11 @@
 package dufflesdsl
 
-import dufflesdsl.model._
-import dufflesdsl.ResourceSet._
-import scala.util.{ Try, Failure, Success }
+import scala.util.{ Failure, Success, Try }
 
-trait Modifier extends BaseDriver {
+import dufflesdsl.model._
+import dufflesdsl.model.ResourceSet._
+
+trait Modifier {
 
   def modify(set: ResourceSet)(implicit run: String => Status): Try[ResourceSet] =
     modifyASet(set, modifyAResource)
@@ -23,9 +24,10 @@ trait Modifier extends BaseDriver {
       case p: Package => Modifier.modifyPackage(p)
       case r          => Failure(new IllegalArgumentException("modifier not implemented for " + r.name))
     }
+
 }
 
-private object Modifier {
+private object Modifier extends BaseDriver {
 
   def modifyFile(f: File)(implicit run: String => Status): Try[File] = (updateOwner _ andThen updateContent)(f)
 

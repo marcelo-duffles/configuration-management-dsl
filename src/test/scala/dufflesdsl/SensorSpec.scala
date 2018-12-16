@@ -1,11 +1,13 @@
 package dufflesdsl
 
-import org.scalatest.{ WordSpec, Matchers }
-import scala.util.{ Try, Failure, Success }
-import dufflesdsl.Sensor._
+import scala.util.{ Failure, Success }
+
+import org.scalatest.{ Matchers, WordSpec }
+
+import dufflesdsl.Sensor.senseFile
 import dufflesdsl.model._
 
-class SensorSpec extends WordSpec with Matchers {
+class SensorSpec extends WordSpec with Matchers with Sensor {
 
   "The method realityOfASet()" when {
 

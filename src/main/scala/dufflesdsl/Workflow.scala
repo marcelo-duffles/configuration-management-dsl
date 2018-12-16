@@ -1,10 +1,10 @@
 package dufflesdsl
 
-import dufflesdsl.ResourceSet._
-import dufflesdsl.model._
 import scala.sys.process._
+import scala.util.{ Failure, Success, Try }
 
-import scala.util.{ Try, Success, Failure }
+import dufflesdsl.model._
+import dufflesdsl.model.ResourceSet._
 
 class Workflow(
   target: String
